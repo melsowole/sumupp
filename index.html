@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="index.js"></script>
+</head>
+<body>
+  <header>
+    <h1>My collection</h1>
+    <button class="text-icon-button">Add Collection</button>
+  </header>
+
+  <ul class="collection-grid">
+
+  </ul>
+
+  <script>
+    const container = document.querySelector(".collection-grid");
+
+    for (let i = 0; i < 8; i++) {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+      <article class="collection">
+          <h2>Podcast Collection</h2>
+          <p class="description">On The Spectrum podcast notes.</p>
+          <footer>
+            <p class="label ideas-amount">
+              <span>N</span> ideas
+            </p>
+            <button class="icon-button">More</button>
+          </footer>
+      </article>
+      `;
+
+      container.append(li);
+      
+    }
+  </script>
+</body>
+</html>
