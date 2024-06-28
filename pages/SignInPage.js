@@ -1,13 +1,15 @@
-import {signIn} from '../modules/firebase.js';
+import { signIn } from "../modules/firebase.js";
+import setPageHeader from "../modules/setPageHeader.js";
 
-export default class SignInPage{
-  constructor(){
+export default class SignInPage {
+  constructor() {
     const container = document.createElement("div");
-    container.id = 'firebaseui-auth-container';
+    container.id = "firebaseui-auth-container";
 
-    document.body.append(container);
+    setPageHeader("Welcome to Sumupp");
+
+    document.getElementById("page-content").append(container);
 
     signIn(container);
-    
   }
 }

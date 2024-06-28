@@ -1,4 +1,4 @@
-.note-grid{
+.note-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: var(--l);
@@ -6,9 +6,8 @@
   list-style-type: none;
 }
 
-.note{
+.note-card {
   background-color: var(--color5);
   border-radius: var(--br);
   padding: var(--m);
-
 }

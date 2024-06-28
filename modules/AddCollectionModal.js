@@ -1,14 +1,14 @@
-import{addCollection} from "./firebase.js";
+import { addCollection } from "./firebase.js";
+import Button from "./Button.js";
 
-export default class AddCollectionModal{
-  constructor(){
+export default class AddCollectionModal {
+  constructor() {
     const modal = document.createElement("div");
     modal.classList.add("modal");
-    document.body.append(modal)
+    document.body.append(modal);
 
-    modal.innerHTML =`
+    modal.innerHTML = `
       <div class="modal-card">
-        <button id="close" aria-label="close">x</button>
         <form>
           <h2>Add Collection</h2>
           <div class="input-wrapper">
@@ -19,24 +19,29 @@ export default class AddCollectionModal{
             <label for="description">Description</label>
             <textarea id="description" name="description"></textarea>
           </div>
-          <button id="add">Create</button>
         </form>
       </div>
     `;
 
-    document.getElementById("close").addEventListener("click", ()=>{
-      modal.remove();
-    })
+    const closeBtn = new Button("icon", "close modal", "close");
+    closeBtn.id = "close";
+    document.querySelector(".modal-card").prepend(closeBtn);
 
-    document.querySelector("form").addEventListener("submit", async (e)=>{
+    closeBtn.addEventListener("click", () => {
+      modal.remove();
+    });
+
+    const submitBtn = new Button("text", "create");
+    document.querySelector("form").append(submitBtn);
+
+    document.querySelector("form").addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const formData = Object.fromEntries( new FormData(e.target).entries() );
+      const formData = Object.fromEntries(new FormData(e.target).entries());
 
-      addCollection(formData).then(r=>{
+      addCollection(formData).then((r) => {
         window.location.reload();
       });
     });
-
   }
 }

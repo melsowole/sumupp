@@ -1,15 +1,14 @@
+import Button from "./Button.js";
 
-export default class CollectionCard{
-  constructor(parent, collection){
-
+export default class CollectionCard {
+  constructor(parent, collection) {
     this.parent = parent;
     this.collection = collection;
 
     this.createCard();
-
   }
 
-  createCard(){
+  createCard() {
     const li = document.createElement("li");
 
     li.innerHTML = `
@@ -20,12 +19,15 @@ export default class CollectionCard{
           <p class="label ideas-amount">
             <span>${this.collection.notes.length}</span> ideas
           </p>
-          <button class="icon-button collection-actions">More</button>
         </footer>
     </article>
     `;
 
-    this.parent.append(li);
+    const cardActionsBtn = new Button("icon-solo", "more", "more_horiz");
+    cardActionsBtn.classList.add("collection-actions");
 
+    li.querySelector("footer").append(cardActionsBtn);
+
+    this.parent.append(li);
   }
 }

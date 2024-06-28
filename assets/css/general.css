@@ -37,3 +37,9 @@ hr {
   border: none;
   border-bottom: 1px solid black;
 }
+
+.collection-card,
+.note-card,
+.button {
+  cursor: pointer;
+}

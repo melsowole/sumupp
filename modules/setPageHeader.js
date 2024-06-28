@@ -1,20 +1,36 @@
+import Button from "./Button";
 
-export default function setPageHeader(title, backRoute, actions){
-  document.getElementById("page-title").textContent = title;
-  
-  if(backRoute){
-    document.getElementById("back-nav").addEventListener("click", ()=>{
+export default function setPageHeader(title, backRoute, actions) {
+  const header = document.getElementById("page-header");
+
+  const pageTitle = document.createElement("h1");
+  pageTitle.textContent = title;
+  header.append(pageTitle);
+
+  if (backRoute) {
+    const backButton = createBackButton();
+
+    header.prepend(backButton);
+
+    backButton.addEventListener("click", () => {
       window.location.assign(backRoute);
-    })
-  } else {
-    document.getElementById("back-nav").remove();
+    });
   }
 
-  if(actions){
-    actions.forEach(action => {
-      document.getElementById("page-actions").append(action)
+  if (actions) {
+    const actionContainer = document.createElement("span");
+    actionContainer.id = "page-actions";
+    header.append(actionContainer);
+
+    actions.forEach((action) => {
+      actionContainer.append(action);
     });
-  }else {
-    document.getElementById("page-actions").remove();
   }
+}
+
+function createBackButton() {
+  const backButton = new Button("icon", "back", "arrow_back");
+  backButton.id = "back-nav";
+
+  return backButton;
 }
