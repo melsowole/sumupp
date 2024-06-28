@@ -2,41 +2,41 @@
 .collection-grid{
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: var(--l);
 
   list-style-type: none;
 }
 
-.collection{
+.collection-card{
   width: 350px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: var(--m);
 
-  border-radius: 0.5rem;
+  border-radius: var(--br);
   min-height: 300px;
 
   color: var(--on-color);
 }
 
-.collection .description{
+.collection-card .description{
   flex-grow: 1;
 }
 
-.collection footer{
+.collection-card footer{
   display: flex;
   justify-content: space-between;
 }
 
-.collection-grid li:nth-child(4n + 1) > .collection{
+.collection-grid li:nth-child(4n + 1) > .collection-card{
   background-color: var(--color1);
 }
-.collection-grid li:nth-child(4n + 2) > .collection{
+.collection-grid li:nth-child(4n + 2) > .collection-card{
   background-color: var(--color2);
 }
-.collection-grid li:nth-child(4n + 3) > .collection{
+.collection-grid li:nth-child(4n + 3) > .collection-card{
   background-color: var(--color3);
 }
-.collection-grid li:nth-child(4n + 4) > .collection{
+.collection-grid li:nth-child(4n + 4) > .collection-card{
   background-color: var(--color4);
 }

@@ -1,19 +1,39 @@
-:root  {
-  --color1: #7A590C;
+:root {
+  --color1: #7a590c;
   --color2: #416834;
-  --color3: #00696D;
-  --color4: #8E4C32;
+  --color3: #00696d;
+  --color4: #8e4c32;
+
+  --color5: #83fbff;
+
   --on-color: #fff;
   --trans: rgba(0, 0, 0, 0.7);
   --background: white;
+
+  --br: 0.5rem;
+
+  --xs: 0.2rem;
+  --s: 0.5rem;
+  --m: 1rem;
+  --l: 2rem;
+  --xl: 3rem;
 }
 
-.label{
+.label {
   text-transform: uppercase;
-
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid black;
 }

@@ -1,42 +1,38 @@
-import CollectionPage from "./pages/CollectionPage";
+import HomePage from "./pages/HomePage.js";
 import SignInPage from "./pages/SignInPage.js";
-import { initApp, signOut, readDocuments, getUserCollections } from "./modules/firebase.js";
+import CollectionPage from "./pages/CollectionPage.js";
+import { auth, signOut, getUserCollections, getAuthenticatedUser } from "./modules/firebase.js";
+import initFooter from "./modules/initFooter.js";
 import Navigo from "navigo";
 
 const router = new Navigo();
 
-router
-  .on(()=>{
-    initApp().then(user=>{
-      if(user){
-        document.body.innerHTML = `
-          <p>Logged in</p>
-          <button>Sign out</button>
-        `;
+auth.onAuthStateChanged(user =>{
 
-        document.querySelector("button").addEventListener("click", ()=>{
-          signOut();
-        })
+  initFooter();
 
-        readDocuments("collections").then(r=>{
-          console.log(r);
-        })
+  router
+  .on("/",()=>{
+    if(user){
+      new HomePage(user);
 
-        getUserCollections(user.uid).then(r=>{
-          console.log(r);
-
-          new CollectionPage(r);
-        })
-        
-        console.log(user.uid);
-
-      } else {
-        router.navigate("/welcome")
-      }
-    })
-
+    } else {
+      router.navigate("/welcome")
+    }
   })
   .on("/welcome", ()=>{
-    new SignInPage();
+    if(user){
+      router.navigate("/")
+    } else {
+      new SignInPage();
+    }
+  })
+  .on("/collection/:id", async ({data})=>{
+    const page = new CollectionPage(data.id);
   })
   .resolve();
+
+})
+
+
+

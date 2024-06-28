@@ -1,18 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
     <script type="module" src="index.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
-
-    <meta charset="UTF-8">
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css"
+    />
+    <meta charset="UTF-8" />
     <title>Sample FirebaseUI App</title>
   </head>
   <body>
+    <main>
+      <header>
+        <span id="back-nav" class="icon-button">back</span>
+        <h1 id="page-title"></h1>
+        <span id="page-actions"></span>
+      </header>
 
+      <div id="page-content"></div>
+    </main>
+
+    <hr />
+    <footer>
+      <span> &copy; Sumupp 2024 </span>
+      <span id="user-actions"></span>
+    </footer>
   </body>
 </html>

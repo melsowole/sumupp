@@ -1,5 +1,9 @@
-
 @import url("general.css");
+@import url("page-layout.css");
 @import url("collections.css");
+@import url("notes.css");
 @import url("modal.css");
 @import url("form.css");
+
+/* page specific css */
+@import url("collectionPage.css");
