@@ -1,20 +1,3 @@
-:root  {
-  --color1: #7A590C;
-  --color2: #416834;
-  --color3: #00696D;
-  --color4: #8E4C32;
-  --on-color: #fff;
-}
-
-.label{
-  text-transform: uppercase;
-
-}
-
-*{
-  margin: 0;
-  padding: 0;
-}
 
 .collection-grid{
   display: flex;

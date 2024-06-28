@@ -5,14 +5,19 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel"
+    "dev": "parcel index.html --cache-dir .parcel-cache"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "firebase": "^10.12.2",
+    "firebaseui": "^6.1.0",
+    "navigo": "^8.11.1",
     "parcel": "^2.12.0"
+  },
+  "devDependencies": {
+    "buffer": "^6.0.3",
+    "process": "^0.11.10"
   }
 }

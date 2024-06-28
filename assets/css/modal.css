@@ -1,0 +1,28 @@
+.modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--trans);
+  width: 100%;
+  height: 100svh;
+  display: grid;
+  place-content: center;
+
+  --top-margin: 2rem;
+  --side-margin: 2rem;
+  --bottom-margin: 2rem;
+}
+
+.modal-card{
+  position: relative;
+  background-color: var(--background);
+  display: inline-block;
+  width: 500px;
+  padding: var(--top-margin)  var(--side-margin)  var(--bottom-margin);
+}
+
+.modal #close{
+  position: absolute;
+  top: var(--top-margin);
+  right: var(--side-margin);
+}

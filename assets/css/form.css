@@ -1,0 +1,15 @@
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+textarea{
+  resize: vertical
+}
+
+input, textarea{
+  padding: 0.2rem;
+}
