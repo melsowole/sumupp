@@ -1,4 +1,4 @@
-import { auth } from "./firebase";
+import { auth, authentication } from "./firebase";
 import Button from "./Button";
 
 export default function initFooter() {

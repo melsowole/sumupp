@@ -11,9 +11,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@editorjs/editorjs": "^2.29.1",
+    "@editorjs/header": "^2.8.1",
     "firebase": "^10.12.2",
     "firebaseui": "^6.1.0",
+    "i": "^0.3.7",
     "navigo": "^8.11.1",
+    "npm": "^10.8.1",
     "parcel": "^2.12.0"
   },
   "devDependencies": {

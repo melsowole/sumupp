@@ -1,0 +1,9 @@
+#editorjs {
+  border: 1px solid black;
+  margin-top: var(--m);
+  padding: var(--s);
+}
+
+.codex-editor__redactor {
+  padding-bottom: 0;
+}

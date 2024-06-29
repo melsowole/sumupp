@@ -1,4 +1,4 @@
-import { getDocuments, getUserCollections } from "../modules/firebase";
+import { collections } from "../modules/firebase";
 import CollectionGrid from "../modules/CollectionGrid";
 import AddCollectionModal from "../modules/AddCollectionModal.js";
 import setPageHeader from "../modules/setPageHeader.js";
@@ -10,7 +10,7 @@ export default class HomePage {
 
     const parent = document.getElementById("page-content");
 
-    getUserCollections(user.uid).then((collections) => {
+    collections.readAll(user.uid).then((collections) => {
       new CollectionGrid(parent, collections);
     });
   }

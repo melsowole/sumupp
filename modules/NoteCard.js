@@ -2,6 +2,8 @@ export default class NoteCard {
   constructor(parent, note) {
     this.parent = parent;
     this.note = note;
+
+    console.log(this.note);
     this.createCard();
   }
 
@@ -15,16 +17,24 @@ export default class NoteCard {
 
     li.append(article);
 
-    if (this.note.title) {
-      const title = document.createElement("h3");
-      title.textContent = this.note.title;
-      article.append(title);
-    }
+    this.note.data.blocks.forEach((block) => {
+      let tag = setTag(block.type, block.data.level);
 
-    if (this.note.text) {
-      const text = document.createElement("p");
-      text.textContent = this.note.text;
-      article.append(text);
-    }
+      const el = document.createElement(tag);
+      el.textContent = block.data.text;
+
+      article.append(el);
+    });
+  }
+}
+
+function setTag(type, level) {
+  switch (type) {
+    case "paragraph":
+      return "p";
+      break;
+    case "header":
+      return "h" + level;
+      break;
   }
 }

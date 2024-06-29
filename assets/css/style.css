@@ -4,6 +4,7 @@
 @import url("notes.css");
 @import url("modal.css");
 @import url("form.css");
+@import url("editor.css");
 
 /* page specific css */
 @import url("collectionPage.css");

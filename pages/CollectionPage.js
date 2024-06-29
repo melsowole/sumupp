@@ -1,5 +1,4 @@
-import { setConsent } from "firebase/analytics";
-import { getCollectionNotes, getCollection } from "../modules/firebase.js";
+import { collections, notes } from "../modules/firebase.js";
 import NoteCard from "../modules/NoteCard.js";
 import setPageHeader from "../modules/setPageHeader.js";
 import Button from "../modules/Button.js";
@@ -24,7 +23,7 @@ export default class CollectionPage {
   }
 
   async populateShell() {
-    getCollection(this.id).then((collection) => {
+    collections.read(this.id).then((collection) => {
       this.collection = collection;
       setPageHeader(this.collection.name, "/", this.pageActions());
 
@@ -34,7 +33,7 @@ export default class CollectionPage {
       }
     });
 
-    getCollectionNotes(this.id).then((notes) => {
+    notes.readAll(this.id).then((notes) => {
       this.notes = notes;
       const parent = document.querySelector(".note-grid");
 
