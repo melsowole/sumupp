@@ -57,7 +57,7 @@ const sources = {
   delete: deleteSource,
 };
 
-export default api = {
+export default {
   routes: {
     notes,
     collections,
