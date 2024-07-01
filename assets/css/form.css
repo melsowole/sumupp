@@ -1,4 +1,4 @@
-.input-wrapper{
+.input-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -6,10 +6,32 @@
   margin-bottom: 1.5rem;
 }
 
-textarea{
-  resize: vertical
+fieldset .input-wrapper {
+  flex-direction: row;
 }
 
-input, textarea{
+fieldset label:after {
+  content: ":";
+}
+
+fieldset input {
+  flex-grow: 1;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input,
+textarea {
   padding: 0.2rem;
+}
+
+fieldset {
+  border: none;
+  margin-top: var(--m);
+}
+
+legend {
+  font-weight: bold;
 }

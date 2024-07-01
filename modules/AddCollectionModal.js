@@ -1,4 +1,4 @@
-import { collections } from "./firebase.js";
+import firebase from "./firebase.js";
 import { FormModal } from "./FormModal.js";
 import { createFormInput } from "./Form.js";
 
@@ -11,7 +11,7 @@ export default class AddCollectionModal {
         { type: "textarea", text: "description" },
       ],
       "create",
-      collections.create
+      firebase.routes.collections.create
     );
 
     document.body.append(modal);

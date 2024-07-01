@@ -1,13 +1,4 @@
-
-.collection-grid{
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--l);
-
-  list-style-type: none;
-}
-
-.collection-card{
+.collection-card {
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -19,24 +10,24 @@
   color: var(--on-color);
 }
 
-.collection-card .description{
+.collection-card .description {
   flex-grow: 1;
 }
 
-.collection-card footer{
+.collection-card footer {
   display: flex;
   justify-content: space-between;
 }
 
-.collection-grid li:nth-child(4n + 1) > .collection-card{
+.collection-grid li:nth-child(4n + 1) > .collection-card {
   background-color: var(--color1);
 }
-.collection-grid li:nth-child(4n + 2) > .collection-card{
+.collection-grid li:nth-child(4n + 2) > .collection-card {
   background-color: var(--color2);
 }
-.collection-grid li:nth-child(4n + 3) > .collection-card{
+.collection-grid li:nth-child(4n + 3) > .collection-card {
   background-color: var(--color3);
 }
-.collection-grid li:nth-child(4n + 4) > .collection-card{
+.collection-grid li:nth-child(4n + 4) > .collection-card {
   background-color: var(--color4);
 }

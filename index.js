@@ -2,13 +2,14 @@ import HomePage from "./pages/HomePage.js";
 import SignInPage from "./pages/SignInPage.js";
 import CollectionPage from "./pages/CollectionPage.js";
 import AddNotePage from "./pages/AddNotePage.js";
-import { auth } from "./modules/firebase.js";
+import firebase from "./modules/firebase.js";
 import initFooter from "./modules/initFooter.js";
 import Navigo from "navigo";
+import NotePage from "./pages/NotePage.js";
 
-const router = new Navigo();
+const router = new Navigo("/");
 
-auth.onAuthStateChanged((user) => {
+firebase.auth.onAuthStateChanged((user) => {
   initFooter();
 
   router
@@ -31,6 +32,9 @@ auth.onAuthStateChanged((user) => {
     })
     .on("/collection/:id/add", async ({ data }) => {
       new AddNotePage(data.id);
+    })
+    .on("/collection/:collectionId/note/:noteId", async ({ data }) => {
+      new NotePage(data.noteId, data.collectionId);
     })
     .resolve();
 });

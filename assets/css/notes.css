@@ -1,12 +1,5 @@
-.note-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: var(--l);
-
-  list-style-type: none;
-}
-
 .note-card {
+  width: 300px;
   background-color: var(--color5);
   border-radius: var(--br);
   padding: var(--m);

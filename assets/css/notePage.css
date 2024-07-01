@@ -1,0 +1,4 @@
+.note-page-container {
+  display: flex;
+  gap: var(--l);
+}

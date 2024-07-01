@@ -1,4 +1,4 @@
-import { auth } from "../modules/firebase.js";
+import firebase from "../modules/firebase.js";
 import setPageHeader from "../modules/setPageHeader.js";
 
 export default class SignInPage {
@@ -10,6 +10,6 @@ export default class SignInPage {
 
     document.getElementById("page-content").append(container);
 
-    auth.user.signIn(container);
+    firebase.auth.user.signIn(container);
   }
 }

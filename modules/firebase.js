@@ -1,7 +1,4 @@
-import { auth } from "./firebase_modules/firebaseInit.js";
-
-import { getDocs, query } from "firebase/firestore";
-import { collection, updateDoc, arrayUnion, doc } from "firebase/firestore";
+import { auth, db } from "./firebase_modules/firebaseInit.js";
 
 import {
   createNote,
@@ -9,6 +6,7 @@ import {
   deleteNote,
   updateNote,
   getNotesOfCollection,
+  getNoteRef,
 } from "./firebase_modules/notes.js";
 
 import {
@@ -29,19 +27,22 @@ import {
 
 import { signIn, signOut } from "./firebase_modules/authentication.js";
 
-// INIT
+// Initialize auth obj
+auth.user = {};
+auth.user.signIn = signIn;
+auth.user.signOut = signOut;
 
-// FUNCTIONS
-
-export const notes = {
+// Define API routes
+const notes = {
   create: createNote,
   read: readNote,
   readAll: getNotesOfCollection,
   update: updateNote,
   delete: deleteNote,
+  getRef: getNoteRef,
 };
 
-export const collections = {
+const collections = {
   create: createCollection,
   read: readCollection,
   readAll: readUserCollections,
@@ -49,28 +50,19 @@ export const collections = {
   delete: deleteCollection,
 };
 
-export const sources = {
+const sources = {
   create: createSource,
   read: readSource,
   update: updateSource,
   delete: deleteSource,
 };
 
-auth.user = {};
-auth.user.signIn = signIn;
-auth.user.signOut = signOut;
-
-export { auth, db };
-
-async function addNoteToCollection(noteRef, collectionId) {
-  try {
-    const collectionRef = doc(db, "collections", collectionId);
-    const update = await updateDoc(collectionRef, {
-      notes: arrayUnion(noteRef),
-    });
-
-    console.log("Added note to collection successfully!");
-  } catch (error) {
-    console.error("Error adding note to collection: ", error);
-  }
-}
+export default api = {
+  routes: {
+    notes,
+    collections,
+    sources,
+  },
+  auth,
+  db,
+};

@@ -30,9 +30,9 @@ export async function readUserCollections(uid) {
   return await readDocuments(cn, where("users", "array-contains", uid));
 }
 
-export async function updateCollection(id, changes) {
+export async function updateCollection(idOrRef, changes) {
   // changes must be: {name, description, add-notes, remove-notes, add-users, or remove-users}
-  return await updateDocument(cn, id, changes);
+  return await updateDocument(cn, idOrRef, changes);
 }
 
 export async function deleteCollection(id) {

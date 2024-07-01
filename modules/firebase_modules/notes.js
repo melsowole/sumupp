@@ -1,30 +1,61 @@
 import { getQueryData } from "./auxi";
-import { readCollection } from "./collections";
-import { createDocument, readDocument } from "./documents";
+import { readCollection, updateCollection } from "./collections";
+import { createSource, findSourceRef, updateSource } from "./sources";
+import {
+  createDocument,
+  readDocument,
+  getDocRef,
+  deleteDocument,
+} from "./documents";
 
 const cn = "notes";
 
 export async function createNote({ data, source, collectionId }) {
-  // TODO: get source ref, or add source
+  // Get source ref, or add new source
+  let sourceRef;
+  const existingSourceRef = await findSourceRef(source);
+  if (existingSourceRef) {
+    sourceRef = existingSourceRef;
+  } else {
+    sourceRef = await createSource(source);
+  }
 
   const newNote = {
     data,
-    source, // TODO: add reference
+    source: sourceRef,
   };
 
-  // TODO: add note to collection
+  const noteRef = await createDocument(cn, newNote);
 
-  return await createDocument(cn, newNote);
+  // add note to source
+  await updateSource(sourceRef, { "add-notes": noteRef });
+
+  // add note to collection
+  await updateCollection(collectionId, { "add-notes": noteRef });
 }
 
-export function readNote(id) {}
+export async function readNote(id) {
+  return await readDocument(cn, id);
+}
 
-export function updateNote() {}
+export async function updateNote() {}
 
-export function deleteNote() {}
+export async function deleteNote(noteId, collectionId) {
+  // get note ref
+  const noteRef = await getNoteRef(noteId);
+  const note = await readNote(noteId);
+
+  // remove from collection array
+  await updateCollection(collectionId, { "remove-notes": noteRef });
+
+  // remove from source array
+  await updateSource(note.source, { "remove-notes": noteRef });
+
+  // remove note
+  await deleteDocument(cn, note.id);
+}
 
 // EXTRA
-
 export async function getNotesOfCollection(collectionId) {
   try {
     const collection = await readCollection(collectionId);
@@ -47,13 +78,6 @@ export async function getNotesOfCollection(collectionId) {
   }
 }
 
-// HELPERS
-
-async function getNoteIdsOfCollection(collectionId) {
-  try {
-    const collection = await readCollection(collectionId);
-    return collection.notes;
-  } catch (error) {
-    return "Error fetching notes ids of collection: ", error;
-  }
+export async function getNoteRef(id) {
+  return await getDocRef(cn, id);
 }

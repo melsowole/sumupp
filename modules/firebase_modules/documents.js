@@ -1,6 +1,13 @@
 import { db, auth } from "./firebaseInit.js";
-import { arrayUnion, collection, query } from "firebase/firestore";
-import { getDoc, getDocs, updateDoc, addDoc, doc } from "firebase/firestore";
+import { arrayUnion, arrayRemove, collection, query } from "firebase/firestore";
+import {
+  getDoc,
+  getDocs,
+  updateDoc,
+  addDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { getQueryData } from "./auxi.js";
 
@@ -24,44 +31,42 @@ export async function createDocument(collectionName, newDocObj) {
 
 export async function readDocument(collectionName, idOrRef) {
   try {
-    let docRef;
-
-    if (typeof idOrRef == "string") {
-      docRef = doc(db, collectionName, idOrRef);
-    } else {
-      docRef = idOrRef;
-    }
+    const docRef = await getDocRef(collectionName, idOrRef);
 
     const docSnapshot = await getDoc(docRef);
 
-    return docSnapshot.data();
+    return getQueryData(docSnapshot);
   } catch (error) {
     console.error(`Error reading document: `, error);
     throw new Error("Failed to read document!");
   }
 }
 
-export async function readDocuments(collectionName, whereStatement) {
+export async function readDocuments(collectionName, whereStatement, getRef) {
   try {
     const q = query(collection(db, collectionName), whereStatement);
 
     const querySnapshot = await getDocs(q);
 
-    return getQueryData(querySnapshot);
+    if (getRef) {
+      return querySnapshot.docs.map((doc) => doc.ref);
+    } else {
+      return getQueryData(querySnapshot);
+    }
   } catch (error) {
     console.error(`Error reading documents: `, error);
     throw new Error("Failed to read documents!");
   }
 }
 
-export async function updateDocument(collectionName, id, changes) {
+export async function updateDocument(collectionName, idOrRef, changes) {
   try {
-    const collectionRef = doc(db, collectionName, id);
+    const docRef = await getDocRef(collectionName, idOrRef);
 
     for (const key in changes) {
-      if (key.contains(/add|remove/)) {
+      if (/add|remove/.test(key)) {
         const fieldName = key.split("-")[1];
-        if (key.contains("add")) {
+        if (key.includes("add")) {
           changes[fieldName] = arrayUnion(changes[key]);
         } else {
           changes[fieldName] = arrayRemove(changes[key]);
@@ -70,20 +75,34 @@ export async function updateDocument(collectionName, id, changes) {
       }
     }
 
-    await updateDoc(collectionRef, changes);
-
+    await updateDoc(docRef, changes);
     console.log(`Document successfully updated!`);
   } catch (error) {
     console.error(`Error updating document: `, error);
-    throw new Error("Failed to read document!");
+    throw new Error("Failed to update document!");
   }
 }
 
 export async function deleteDocument(collectionName, id) {
   try {
+    await deleteDoc(doc(db, collectionName, id));
     console.log(`Document successfully deleted!`);
   } catch (error) {
     console.error(`Error deleting document: `, error);
     throw new Error("Failed to delete document!");
   }
+}
+
+export async function getDocRef(collectionName, idOrRef) {
+  let docRef;
+
+  if (typeof idOrRef == "string") {
+    const id = idOrRef;
+    docRef = doc(db, collectionName, id);
+  } else {
+    const ref = idOrRef;
+    docRef = ref;
+  }
+
+  return docRef;
 }

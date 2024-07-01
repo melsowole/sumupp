@@ -18,13 +18,22 @@ import Header from "@editorjs/header";
  */
 
 export default class Form {
-  constructor(inputInfoArray, submitText, submitAction) {
+  constructor(formElInfoArray, submitText, submitAction, redirect) {
     this.editor;
+    this.currentSection;
+    this.form;
 
     const form = document.createElement("form");
+    this.form = form;
+    this.currentSection = this.form;
 
-    inputInfoArray.forEach((inputInfo) => {
-      form.append(this._createFormInput(inputInfo));
+    formElInfoArray.forEach((elInfo) => {
+      const el = this._createFormEl(elInfo);
+      this.currentSection.append(el);
+
+      if (elInfo.type == "section") {
+        this.currentSection = el;
+      }
     });
 
     const submitBtn = new Button("text", submitText);
@@ -40,32 +49,60 @@ export default class Form {
       }
 
       submitAction(formData).then((r) => {
-        window.location.reload();
+        if (redirect) {
+          console.log("wants to redirect to:", redirect);
+        } else {
+          window.location.reload();
+        }
       });
     });
 
     return form;
   }
 
-  _createFormInput(inputInfo) {
-    if (inputInfo.type == "editor") {
+  _createFormEl(elInfo) {
+    if (elInfo.type == "editor") {
       return this._createEditor();
+    } else if (elInfo.type == "section") {
+      const fieldset = document.createElement("fieldset");
+      const legend = document.createElement("legend");
+      legend.textContent = elInfo.text;
+      fieldset.append(legend);
+
+      return fieldset;
     } else {
-      return this._createLabelInputWrapper(inputInfo);
+      return this._createLabelInputWrapper(elInfo);
     }
   }
 
-  _createLabelInputWrapper({ type, text, id, name, required }) {
+  _createLabelInputWrapper({ type, text, id, name, required, value }) {
     id = id ? id : text;
     name = name ? name : text;
+
+    if (type == "input/hidden") {
+      return this._createInput(type, id, name, required, value);
+    }
 
     const wrapper = document.createElement("div");
     wrapper.classList.add("input-wrapper");
 
+    wrapper.append(
+      this._createLabel(text, id),
+      this._createInput(type, id, name, required, value)
+    );
+
+    return wrapper;
+  }
+
+  _createLabel(text, id) {
     const label = document.createElement("label");
     label.textContent = text;
     label.htmlFor = id;
 
+    return label;
+  }
+
+  _createInput(type, id, name, required, value) {
     let input;
     if (type == "textarea") {
       input = document.createElement(type);
@@ -74,13 +111,13 @@ export default class Form {
       input = document.createElement("input");
       input.type = inputType[1];
     }
+
     input.id = id;
     input.name = name;
     input.required = required;
+    input.value = value ? value : "";
 
-    wrapper.append(label, input);
-
-    return wrapper;
+    return input;
   }
 
   _createEditor() {

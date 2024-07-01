@@ -1,5 +1,7 @@
-import { collections } from "../modules/firebase";
+import firebase from "../modules/firebase";
 import CollectionGrid from "../modules/CollectionGrid";
+import CollectionCard from "../modules/CollectionCard.js";
+import Grid from "../modules/Grid.js";
 import AddCollectionModal from "../modules/AddCollectionModal.js";
 import setPageHeader from "../modules/setPageHeader.js";
 import Button from "../modules/Button.js";
@@ -10,8 +12,14 @@ export default class HomePage {
 
     const parent = document.getElementById("page-content");
 
-    collections.readAll(user.uid).then((collections) => {
-      new CollectionGrid(parent, collections);
+    firebase.routes.collections.readAll(user.uid).then((collections) => {
+      const collectionGrid = new Grid({
+        gridType: "collection",
+        itemType: CollectionCard,
+        items: collections,
+        clickablePath: "/collection/",
+      });
+      parent.append(collectionGrid);
     });
   }
 

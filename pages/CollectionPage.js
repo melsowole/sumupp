@@ -1,7 +1,8 @@
-import { collections, notes } from "../modules/firebase.js";
+import firebase from "../modules/firebase.js";
 import NoteCard from "../modules/NoteCard.js";
 import setPageHeader from "../modules/setPageHeader.js";
 import Button from "../modules/Button.js";
+import Grid from "../modules/Grid.js";
 
 export default class CollectionPage {
   constructor(id) {
@@ -18,12 +19,11 @@ export default class CollectionPage {
     document.getElementById("page-content").innerHTML = `
       <p class="description"></p>
       <hr>
-      <ul class="note-grid"></ul>
     `;
   }
 
   async populateShell() {
-    collections.read(this.id).then((collection) => {
+    firebase.routes.collections.read(this.id).then((collection) => {
       this.collection = collection;
       setPageHeader(this.collection.name, "/", this.pageActions());
 
@@ -33,25 +33,28 @@ export default class CollectionPage {
       }
     });
 
-    notes.readAll(this.id).then((notes) => {
+    firebase.routes.notes.readAll(this.id).then((notes) => {
       this.notes = notes;
-      const parent = document.querySelector(".note-grid");
 
-      if (this.notes.length === 0) {
-        const noNotesMessage = document.createElement("span");
-        noNotesMessage.textContent = "No notes yet...";
-        parent.append(noNotesMessage);
-      }
-
-      notes.forEach((note) => {
-        new NoteCard(parent, note);
+      const grid = new Grid({
+        gridType: "note",
+        items: notes,
+        itemType: NoteCard,
+        clickablePath: "/collection/" + this.id + "/note/",
       });
+
+      const parent = document.getElementById("page-content");
+
+      parent.append(grid);
     });
   }
 
   pageActions() {
-    const editCollectionButton = new Button("text-icon", "edit", "edit");
+    const addNoteButton = new Button("text-icon", "add new note", "add");
+    addNoteButton.addEventListener("click", () => {
+      window.location.assign(window.location.pathname + "/add");
+    });
 
-    return [editCollectionButton];
+    return [addNoteButton];
   }
 }

@@ -5,6 +5,8 @@
 @import url("modal.css");
 @import url("form.css");
 @import url("editor.css");
+@import url("grid.css");
 
 /* page specific css */
 @import url("collectionPage.css");
+@import url("notePage.css");
