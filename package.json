@@ -2,10 +2,10 @@
   "name": "sumupp",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "parcel index.html --cache-dir .parcel-cache"
+    "dev": "parcel index.html --cache-dir .parcel-cache",
+    "build": "parcel build ./index.html --dist-dir docs --public-url ./"
   },
   "keywords": [],
   "author": "",
