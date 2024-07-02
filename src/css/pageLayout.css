@@ -1,0 +1,33 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+
+  padding: var(--m) var(--l);
+  gap: var(--m);
+}
+
+#root main {
+  flex-grow: 1;
+}
+
+#root main > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  padding-bottom: var(--m);
+}
+
+#root > footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#root > footer #user-actions {
+  display: flex;
+  gap: var(--m);
+}
+
+main hr {
+  margin: var(--m) 0;
+}

@@ -1,0 +1,26 @@
+@import url("./css/general.css");
+@import url("./css/pageLayout.css");
+@import url("./css/collections.css");
+@import url("./css/notes.css");
+@import url("./css/modal.css");
+@import url("./css/form.css");
+@import url("./css/editor.css");
+@import url("./css/grid.css");
+
+/* page specific css */
+@import url("./css/collectionPage.css");
+@import url("./css/notePage.css");
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
