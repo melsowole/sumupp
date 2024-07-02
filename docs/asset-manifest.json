@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sumupp/static/css/main.264257ff.css",
+    "main.js": "/sumupp/static/js/main.9e72668a.js",
+    "index.html": "/sumupp/index.html",
+    "main.264257ff.css.map": "/sumupp/static/css/main.264257ff.css.map",
+    "main.9e72668a.js.map": "/sumupp/static/js/main.9e72668a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.264257ff.css",
+    "static/js/main.9e72668a.js"
+  ]
+}
