@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, EmailAuthProvider } from "firebase/auth";
+import { EmailAuthProvider } from "firebase/auth";
 import { auth } from "../firebaseConfig.js";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
@@ -15,7 +15,7 @@ export async function signIn(container) {
   var uiConfig = {
     signInSuccessUrl: "/",
     signInOptions: [
-      GoogleAuthProvider.PROVIDER_ID,
+      // GoogleAuthProvider.PROVIDER_ID,
       EmailAuthProvider.PROVIDER_ID,
     ],
     tosUrl: "<your-tos-url>",

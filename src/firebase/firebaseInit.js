@@ -4,6 +4,8 @@ import * as collections from "./crud/collections.js";
 import * as sources from "./crud/sources.js";
 import { signIn, signOut } from "./crud/authentication.js";
 
+console.log("importing firebaseConfig");
+
 // Initialize auth obj
 auth.user = {};
 auth.user.signIn = signIn;

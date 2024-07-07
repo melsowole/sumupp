@@ -4,6 +4,10 @@ import privateRouter from "./routes/privateRouter";
 
 const isSignedIn = firebase.auth.currentUser;
 
-const router = isSignedIn ? privateRouter : publicRouter;
+function getRouter() {
+  console.log("deciding router");
 
-export default router;
+  return isSignedIn ? privateRouter : publicRouter;
+}
+
+export default getRouter;

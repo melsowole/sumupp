@@ -12,6 +12,12 @@ const firebaseConfig = {
   measurementId: "G-ENJR4HFF43",
 };
 
+console.log("initializing app");
+
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app); // give access to currentUser outside module
-export const db = getFirestore(app);
+const auth = getAuth(app); // give access to currentUser outside module
+const db = getFirestore(app);
+
+console.log("exporting auth and db");
+
+export { auth, db };
